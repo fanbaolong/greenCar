@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">绿能租车</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    
+    <string name="Class_no_device">T_T!您的设备不支持拨号功能哦！</string>
+    <string name="re_exit">再按一次退出</string>
+
+</resources>

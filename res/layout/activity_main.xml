@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+	style="@style/layoutbg"
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:background="@color/base_bg_gray">
+
+	<com.green.car.view.MyViewPager
+		android:id="@+id/pager"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_above="@+id/tabs"/>
+
+	<com.green.car.view.PagerSlidingTabStrip
+		android:id="@+id/tabs"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:background="@color/white"
+		android:overScrollMode="never"/>
+</RelativeLayout>

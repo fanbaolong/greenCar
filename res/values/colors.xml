@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ==========new==start=================== -->
+    <!-- 页面背景 -->
+    <color name="color_bg">#f7f7f7</color>
+    <!-- 头部背景 -->
+    <color name="color_title_bg">#00aaff</color>
+    <!-- <color name="top_title">#104493</color> -->
+    <!-- 白色背景 -->
+    <color name="white">#ffffff</color>
+    <!-- 灰色大背景 -->
+    <color name="base_bg_gray">#f0f0f0</color>
+    
+    <color name="title_light_gray">#9b9b9b</color>
+    <color name="menu_right">#f5f3f0</color>
+    <!-- title下面的黑线 -->
+    <color name="title_unline">#bbbbbb</color>
+    <!-- 新闻详情，底部评论的详情 -->
+    <!-- 分隔符的颜色 -->
+    <color name="greyish">#D5D5D5</color>
+    <!-- 浅灰色 -->
+    <color name="milk_white">#e3e3e3</color>
+    <!-- 透明 -->
+    <color name="transparent">#00000000</color>
+    <color name="background_tab_pressed">#6633B5E5</color>
+    <!-- 红色 -->
+    <color name="red">#d10000</color>
+    <color name="esscencered">#f23521</color>
+    <color name="red_deep">#C90369</color>
+    <color name="signed">#967749</color>
+    <!-- 蓝色 -->
+    <color name="blue">#097EAF</color>
+    <!-- 白色 -->
+    <color name="ivory">#FFFFF0</color>
+    <!-- 青色 -->
+    <color name="qingse">#00CC00</color>
+    <!-- 象牙色 -->
+    <color name="lightyellow">#FFFFE0</color>
+    <!-- 亮黄色 -->
+    <color name="yellow">#FFFF00</color>
+    <!-- 亮黄色 -->
+    <color name="yellow11">#55FD01</color>
+    <!-- 其他登录方式颜色 -->
+    <color name="other_login_color">#7b7b7b</color>
+    <!-- 土灰色 -->
+    <color name="tu_gray">#a9a9a9</color>
+    <!-- 海军色 -->
+    <color name="black_light">#502E3235</color>
+    <color name="black">#000000</color>
+    <color name="black666">#666</color>
+    <color name="black111">#111</color>
+    <!-- 浅蓝色背景 -->
+    <color name="blue_light">#5bbce4</color>
+    <!-- 注册和 登录模块颜色 -->
+    <color name="light_gray">#dcdcdc</color>
+    <!-- 黄色 -->
+    <color name="yellow2">#feff97</color>
+    <color name="green_deep">#009E3C</color>
+    <!-- 黑色 -->
+    <color name="black_true">#000000</color>
+
+    <!-- 黑色字体的三种颜色，又浅到深 -->
+    <color name="text_9">#999999</color>
+    <color name="text_6">#666666</color>
+    <color name="text_3">#333333</color>
+    
+    <!-- 分割线颜色 -->
+    <color name="line">#e3e3e3</color>
+
+</resources>
