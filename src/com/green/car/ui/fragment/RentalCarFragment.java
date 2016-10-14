@@ -33,7 +33,6 @@ import com.green.car.injector.Res;
 import com.green.car.util.CommonUtils;
 import com.green.car.util.LocationUtils;
 import com.green.car.util.LocationUtils.OnLocationListener;
-import com.green.car.util.NewToast;
 
 public class RentalCarFragment extends BaseFragment implements OnClickListener,
 OnMapClickListener, OnMarkerClickListener {
@@ -93,14 +92,6 @@ OnMapClickListener, OnMarkerClickListener {
 			btn_search.setOnClickListener(this);
 			tv_location.setOnClickListener(this);
 			
-			mlastMarker = mAMap.addMarker(new MarkerOptions()
-			.anchor(0.5f, 0.5f)
-			.icon(BitmapDescriptorFactory
-					.fromBitmap(BitmapFactory.decodeResource(getResources(),
-							R.drawable.point)))
-							.position(new LatLng(lp.getLatitude(), lp.getLongitude())));
-			mlastMarker.showInfoWindow();
-
 		}
 		rentalPoints = RentalPoint.getRentalPoints("");
 		mAMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
@@ -110,7 +101,7 @@ OnMapClickListener, OnMarkerClickListener {
 
 	/** 添加店铺点 */
 	private void addMarker() {
-//		mAMap.clear();
+		mAMap.clear();
 		mlastMarker = null;
 		for (int i = 0; i < rentalPoints.size(); i++) {
 			addItem(rentalPoints.get(i), i);
@@ -120,6 +111,14 @@ OnMapClickListener, OnMarkerClickListener {
 				&& (child instanceof ImageView || child instanceof ZoomControls)) {
 			child.setVisibility(View.INVISIBLE);
 		}
+		
+		mlastMarker = mAMap.addMarker(new MarkerOptions()
+		.anchor(0.5f, 0.5f)
+		.icon(BitmapDescriptorFactory
+				.fromBitmap(BitmapFactory.decodeResource(getResources(),
+						R.drawable.point)))
+						.position(new LatLng(lp.getLatitude(), lp.getLongitude())));
+		mlastMarker.showInfoWindow();
 	}
 
 	Marker addItem(RentalPoint result, int i) {
@@ -172,7 +171,7 @@ OnMapClickListener, OnMarkerClickListener {
 			doSearchQuery();
 			break;
 		case R.id.tv_location:
-			location();
+			mAMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(lp.getLatitude(), lp.getLongitude())));
 			break;
 
 		default:
