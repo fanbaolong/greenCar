@@ -132,7 +132,7 @@ public abstract class BaseActivity extends FragmentActivity {
 	 * // 然后在每个页面中重新集成页面统计的代码(包括调用了 onResume 和 onPause 的Activity)。
 	 * MobclickAgent.openActivityDurationTrack(false); //
 	 * MobclickAgent.setAutoLocation(true); //
-	 * MobclickAgent.setSessionContinueMillis(1000);
+	 * MobclickAgent.setSessionContinueMillis(1000); 
 	 */
 
 	/**
