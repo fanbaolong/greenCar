@@ -157,7 +157,7 @@ OnMapClickListener, OnMarkerClickListener {
 				new LatLng(Double.valueOf(searchPoints.get(i).getPositionY()), Double.valueOf(searchPoints.get(i)
 						.getPositionX())))
 						.icon(BitmapDescriptorFactory
-								.fromResource(R.drawable.wangdain))
+								.fromResource(R.drawable.wangdian))
 								.draggable(true);
 		Marker marker = mAMap.addMarker(options);
 		marker.setTitle(i + "");
@@ -190,7 +190,7 @@ OnMapClickListener, OnMarkerClickListener {
 		mlastMarker
 		.setIcon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
 				.decodeResource(getResources(),
-						R.drawable.wangdain)));
+						R.drawable.wangdian)));
 		mlastMarker = null;
 	}
 
