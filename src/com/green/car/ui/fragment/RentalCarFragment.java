@@ -1,5 +1,7 @@
 package com.green.car.ui.fragment;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import android.graphics.BitmapFactory;
@@ -25,6 +27,9 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.services.core.LatLonPoint;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.green.car.API;
 import com.green.car.BaseFragment;
 import com.green.car.R;
 import com.green.car.bean.RentalPoint;
@@ -49,7 +54,10 @@ OnMapClickListener, OnMarkerClickListener {
 	private LatLonPoint lp;//
 	private Marker mlastMarker;// 选择的点
 	private UiSettings mUiSettings;// 定义一个UiSettings对象
-	private List<RentalPoint> rentalPoints;
+	//所有网点
+	private List<RentalPoint> rentalPoints = new ArrayList<RentalPoint>();
+	//显示的网点
+	private List<RentalPoint> searchPoints = new ArrayList<RentalPoint>();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,18 +101,40 @@ OnMapClickListener, OnMarkerClickListener {
 			tv_location.setOnClickListener(this);
 			
 		}
-		rentalPoints = RentalPoint.getRentalPoints("");
+		getData();
 		mAMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
 				new LatLng(lp.getLatitude(), lp.getLongitude()), 14));
-		addMarker();
+	}
+
+	/**
+	 * 获取网点信息
+	 */
+	private void getData() {
+		HashMap<String, Object> reqMap = new HashMap<String, Object>();
+		requestPost(true, API.getSites, reqMap);
+	}
+	
+	@Override
+	public void responseSuccess(Object result, String value, String tag) {
+		super.responseSuccess(result, value, tag);
+		if (tag.equals(API.getSites)) {//获取网店列表
+			searchPoints.clear();
+			rentalPoints.clear();
+			Gson gson = new Gson();
+			rentalPoints = gson.fromJson(result.toString(), new TypeToken<List<RentalPoint>>()
+			{
+			}.getType());
+			searchPoints.addAll(rentalPoints);
+			addMarker();
+		}
 	}
 
 	/** 添加店铺点 */
 	private void addMarker() {
 		mAMap.clear();
 		mlastMarker = null;
-		for (int i = 0; i < rentalPoints.size(); i++) {
-			addItem(rentalPoints.get(i), i);
+		for (int i = 0; i < searchPoints.size(); i++) {
+			addItem(searchPoints.get(i), i);
 		}
 		View child = mapview.getChildAt(1);
 		if (child != null
@@ -124,10 +154,10 @@ OnMapClickListener, OnMarkerClickListener {
 	Marker addItem(RentalPoint result, int i) {
 		MarkerOptions options = new MarkerOptions();
 		options.position(
-				new LatLng(rentalPoints.get(i).getLat(), rentalPoints.get(i)
-						.getLont()))
+				new LatLng(Double.valueOf(searchPoints.get(i).getPositionY()), Double.valueOf(searchPoints.get(i)
+						.getPositionX())))
 						.icon(BitmapDescriptorFactory
-								.fromResource(R.drawable.poi_marker_pressed))
+								.fromResource(R.drawable.wangdain))
 								.draggable(true);
 		Marker marker = mAMap.addMarker(options);
 		marker.setTitle(i + "");
@@ -160,7 +190,7 @@ OnMapClickListener, OnMarkerClickListener {
 		mlastMarker
 		.setIcon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
 				.decodeResource(getResources(),
-						R.drawable.poi_marker_pressed)));
+						R.drawable.wangdain)));
 		mlastMarker = null;
 	}
 
@@ -183,7 +213,7 @@ OnMapClickListener, OnMarkerClickListener {
 	 * 开始进行poi搜索
 	 */
 	protected void doSearchQuery() {
-		rentalPoints = RentalPoint.getRentalPoints(CommonUtils
+		searchPoints = RentalPoint.getRentalPoints(rentalPoints, CommonUtils
 				.getEdit(input_edittext));
 		addMarker();
 	}
@@ -207,8 +237,8 @@ OnMapClickListener, OnMarkerClickListener {
 	private void whetherToShowDetailInfo(boolean isToShow, int index) {
 		if (isToShow) {
 			poi_detail.setVisibility(View.VISIBLE);
-			poi_name.setText(CommonUtils.isNull(rentalPoints.get(index).getName()));
-			poi_address.setText(CommonUtils.isNull(rentalPoints.get(index).getAddress()));
+			poi_name.setText(CommonUtils.isNull(searchPoints.get(index).getName()));
+			poi_address.setText(CommonUtils.isNull(searchPoints.get(index).getPositionName()));
 		}else {
 			poi_detail.setVisibility(View.GONE);
 		}

@@ -2,6 +2,8 @@ package com.green.car.http;
 
 import org.json.JSONObject;
 
+import com.green.car.util.CommonUtils;
+
 import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
@@ -45,17 +47,13 @@ public class MyRequestHandler extends RequestHandler {
 		JSONObject jsonObject = null;
 		try {
 			jsonObject = new JSONObject(object.toString());
-			String value = CommonFunction.getValueByKey(jsonObject, "msg").toString();
-			String objValue = CommonFunction.getValueByKey(jsonObject, "data").toString();
-			int errorCode = Integer.parseInt(TextUtils.isEmpty(CommonFunction.getValueByKey(jsonObject, "status").toString()) ? "-1" : CommonFunction
-					.getValueByKey(jsonObject, "status").toString());
-			if (errorCode == 0) {
-				checkSuccess(objValue, value, tag);
+			String resultType = CommonFunction.getValueByKey(jsonObject, "resultType").toString();
+			String resultMes = CommonFunction.getValueByKey(jsonObject, "resultMes").toString();
+			String objectResult = CommonFunction.getValueByKey(jsonObject, "objectResult").toString();
+			if (CommonUtils.isNull(resultType).equals("OK")) {
+				checkSuccess(objectResult, resultMes, tag);
 			} else {
-				if (errorCode == -1) {
-					checkFailure("暂无数据", tag, errorCode + "", objValue);
-				} else
-					checkFailure(value, tag, errorCode + "", objValue);
+				checkFailure("暂无数据", tag, resultType, "");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
